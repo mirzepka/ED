@@ -46,6 +46,11 @@ c=cos(cos(cos((2)))) #magrittr
 install.packages("readxl")
 library(readxl) #import
 piwa1 <- read.xls("http://kt.agh.edu.pl/~janowski/PiwaWyniki.xlsx",2)
+#do zadania 8:
+#Rodzaj - zmienna nominalna
+#Piwo - zmienna nominalna
+
+summary(piwa1)
 
 #4.Odwloanie do tabel
 
@@ -59,11 +64,38 @@ piwa$Tester
 piwa$Rodzaj[30] #??
 summary(piwa$Ocena)
 
+#5. API
+
+#jak czytac zewnetrzne dane:
+install.packages("SmarterPoland")
+library(SmarterPoland)
+tsdtr210 <- getEurostartRCV("tsdtr210")
 
 
+#6.wizualiazcja/zabawa danymi
+
+library(ggplot)
+ggplot(data = tsdtr210[tsdtr210$geo == "PL",],
+       aes(x=time, y=value, group=vehicle, colour=vehicle))+geom_line()
 
 
+#7. zapisywanie
+#do R
+save(piwa, file="pierwszewyniki.rda")
+load("peirwszywynk.rda")
 
+#8.zmienne nominalne
+summary(met)
+
+?read.csv
+#factor moez byc zeminna nominalna i porzadkowom
+
+#sprawdzanie klasy obiektu
+class(c)
+
+#zmiana klasy:
+class(c) <-c("mojaklasa")
+class(c)
 
 
 
